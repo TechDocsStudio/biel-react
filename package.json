@@ -1,0 +1,43 @@
+{
+  "name": "biel-react",
+  "version": "0.1.0",
+  "description": "Biel wrapper for React",
+  "author": "TechDocs Studio <hi@techdocs.studio>",
+  "homepage": "https://github.com/TechDocsStudio/biel-react#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "biel-search": "^0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TechDocsStudio/biel-react.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/react-library.test.js",
+    "build": "npm run tsc",
+    "tsc": "tsc -p ."
+  },
+  "bugs": {
+    "url": "https://github.com/TechDocsStudio/biel-react/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.3",
+    "@types/react": "^18.2.14",
+    "lerna": "^7.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.1.6"
+  }
+}
