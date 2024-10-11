@@ -4,7 +4,7 @@ Ask AI chatbot for React applications.
 
 ## Get started
 
-See [AI chatbotfor React](https://docs.biel.ai/installation/react) documentation.
+See [AI chatbot for React](https://docs.biel.ai/installation/react) documentation.
 
 ## Support
 
