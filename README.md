@@ -13,7 +13,7 @@ The integration works with any React site and adds both chat and advanced search
 
 - AI chatbot that provides instant responses to queries. 
 - AI search engine for quick and relevant information retrieval.
-- Integration with Docusaurus 3.
+- Integration with React 18+.
 - Customizable to match your site's branding and user needs.
 
 ## Get started
