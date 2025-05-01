@@ -1,8 +1,8 @@
 {
   "name": "biel-react",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Biel wrapper for React",
-  "author": "TechDocs Studio <hi@techdocs.studio>",
+  "author": "TechDocs Studio <info@techdocs.studio>",
   "homepage": "https://github.com/TechDocsStudio/biel-react#readme",
   "license": "ISC",
   "main": "dist/index.js",
