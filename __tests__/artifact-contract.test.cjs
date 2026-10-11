@@ -20,6 +20,18 @@ const temporary = fs.mkdtempSync(
 );
 const repository = path.resolve(__dirname, "..");
 try {
+  const manifest = JSON.parse(
+    fs.readFileSync(path.join(repository, "package.json"), "utf8"),
+  );
+  assert.equal(manifest.dependencies["biel-search"], "latest");
+  const latest = JSON.parse(
+    run("npm", ["view", "biel-search", "dist-tags.latest", "--json"], repository),
+  );
+  const override = "0.1.93";
+  assert.notEqual(
+    override, latest,
+    "The override fixture must differ from published latest",
+  );
   const packed = JSON.parse(
     run(
       "npm",
@@ -34,62 +46,71 @@ try {
     ["18.3.1", "18"],
     ["19.3.0", "19"],
   ]) {
-    const consumer = path.join(temporary, version);
-    fs.mkdirSync(consumer);
-    fs.writeFileSync(
-      path.join(consumer, "package.json"),
-      JSON.stringify({
-        name: "artifact-consumer",
-        version: "1.0.0",
-        private: true,
-      }),
-    );
-    run(
-      "npm",
-      [
-        "install",
-        "--ignore-scripts",
-        "--no-audit",
-        "--no-fund",
-        tarball,
-        `react@${version}`,
-        `react-dom@${version}`,
-        `@types/react@${types}`,
-        "typescript@5.5.4",
-        "jsdom@26.1.0",
-      ],
-      consumer,
-    );
-    fs.copyFileSync(
-      path.join(__dirname, "packed-consumer.cjs"),
-      path.join(consumer, "consumer.cjs"),
-    );
-    process.stdout.write(run(process.execPath, ["consumer.cjs"], consumer));
-    fs.writeFileSync(
-      path.join(consumer, "contract.tsx"),
-      `import * as React from 'react';\nimport { BielBot, BielSearch, BielButton, BielSearchButton, defineCustomElements } from 'biel-react';\nconst ref=React.createRef<HTMLBielBotElement>();\nconst bot=<BielBot ref={ref} project={'quote" 日本語 </script>'} keepConversation={true} renderMath={false} initialMessages={[{text:'你好',sender:'ai',isPartial:false}]} onCloseBot={()=>{}} />;\nconst search=<BielSearch project='p' onMessageSent={event=>console.log(event.detail.message)} />;\nconst button=<BielButton project='p' />;\nconst searchButton=<BielSearchButton project='p' />;\n// @ts-expect-error unknown props must remain invalid\nconst invalid=<BielBot nonexistentAuditProp={true} />;\nvoid [bot,search,button,searchButton,invalid,defineCustomElements];\n`,
-    );
-    run(
-      process.execPath,
-      [
-        "node_modules/typescript/bin/tsc",
-        "--noEmit",
-        "--strict",
-        "--skipLibCheck",
-        "--jsx",
-        "react",
-        "--moduleResolution",
-        "node",
-        "--esModuleInterop",
-        "--lib",
-        "dom,es2020",
-        "contract.tsx",
-      ],
-      consumer,
-    );
-    console.log(
-      `PASS packed React ${version}: CJS/ESM, actual widget mount, props/events/ref/SSR and canonical TypeScript contracts`,
-    );
+    for (const selectedVersion of [null, override]) {
+      const mode = selectedVersion ? "override" : "latest";
+      const expectedWidget = selectedVersion || latest;
+      const consumer = path.join(temporary, `${version}-${mode}`);
+      fs.mkdirSync(consumer);
+      fs.writeFileSync(
+        path.join(consumer, "package.json"),
+        JSON.stringify({
+          name: "artifact-consumer",
+          version: "1.0.0",
+          private: true,
+          ...(selectedVersion
+            ? { overrides: { "biel-react": { "biel-search": selectedVersion } } }
+            : {}),
+        }),
+      );
+      run(
+        "npm",
+        [
+          "install",
+          "--ignore-scripts",
+          "--no-audit",
+          "--no-fund",
+          tarball,
+          `react@${version}`,
+          `react-dom@${version}`,
+          `@types/react@${types}`,
+          "typescript@5.5.4",
+          "jsdom@26.1.0",
+        ],
+        consumer,
+      );
+      fs.copyFileSync(
+        path.join(__dirname, "packed-consumer.cjs"),
+        path.join(consumer, "consumer.cjs"),
+      );
+      process.stdout.write(
+        run(process.execPath, ["consumer.cjs", expectedWidget], consumer),
+      );
+      fs.writeFileSync(
+        path.join(consumer, "contract.tsx"),
+        `import * as React from 'react';\nimport { BielBot, BielSearch, BielButton, BielSearchButton, defineCustomElements } from 'biel-react';\nconst ref=React.createRef<HTMLBielBotElement>();\nconst bot=<BielBot ref={ref} project={'quote" 日本語 </script>'} keepConversation={true} renderMath={false} initialMessages={[{text:'你好',sender:'ai',isPartial:false}]} onCloseBot={()=>{}} />;\nconst search=<BielSearch project='p' onMessageSent={event=>console.log(event.detail.message)} />;\nconst button=<BielButton project='p' />;\nconst searchButton=<BielSearchButton project='p' />;\n// @ts-expect-error unknown props must remain invalid\nconst invalid=<BielBot nonexistentAuditProp={true} />;\nvoid [bot,search,button,searchButton,invalid,defineCustomElements];\n`,
+      );
+      run(
+        process.execPath,
+        [
+          "node_modules/typescript/bin/tsc",
+          "--noEmit",
+          "--strict",
+          "--skipLibCheck",
+          "--jsx",
+          "react",
+          "--moduleResolution",
+          "node",
+          "--esModuleInterop",
+          "--lib",
+          "dom,es2020",
+          "contract.tsx",
+        ],
+        consumer,
+      );
+      console.log(
+        `PASS packed React ${version}, widget ${mode} ${expectedWidget}: CJS/ESM, actual widget mount, props/events/ref/SSR and canonical TypeScript contracts`,
+      );
+    }
   }
 } finally {
   fs.rmSync(temporary, { recursive: true, force: true });

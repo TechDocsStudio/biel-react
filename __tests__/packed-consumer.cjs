@@ -51,7 +51,8 @@ const pause = () => new Promise((resolve) => setTimeout(resolve, 30));
   ]);
   const esm = await import("biel-react");
   assert.deepEqual(Object.keys(esm).sort(), Object.keys(api).sort());
-  assert.equal(require("biel-search/package.json").version, "0.1.94");
+  assert(process.argv[2], "Expected installed widget version is required");
+  assert.equal(require("biel-search/package.json").version, process.argv[2]);
   await api.defineCustomElements(window);
   const props = {
     project: 'quote" 日本語 </script>',
