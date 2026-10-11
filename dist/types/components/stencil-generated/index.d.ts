@@ -1,0 +1,5 @@
+import type { JSX } from 'biel-search';
+export declare const BielButton: import("react").ForwardRefExoticComponent<JSX.BielButton & Omit<import("react").HTMLAttributes<HTMLBielButtonElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLBielButtonElement>>;
+export declare const BielBot: import("react").ForwardRefExoticComponent<JSX.BielBot & Omit<import("react").HTMLAttributes<HTMLBielBotElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLBielBotElement>>;
+export declare const BielSearchButton: import("react").ForwardRefExoticComponent<JSX.BielSearchButton & Omit<import("react").HTMLAttributes<HTMLBielSearchButtonElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLBielSearchButtonElement>>;
+export declare const BielSearch: import("react").ForwardRefExoticComponent<JSX.BielSearch & Omit<import("react").HTMLAttributes<HTMLBielSearchElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLBielSearchElement>>;

@@ -1,3 +1,2 @@
-export declare const BielButton: import("react").ForwardRefExoticComponent<import("react").RefAttributes<unknown>>;
-export declare const BielBot: import("react").ForwardRefExoticComponent<import("react").RefAttributes<unknown>>;
-export declare const BielSearchButton: import("react").ForwardRefExoticComponent<import("react").RefAttributes<unknown>>;
+export * from "./components/stencil-generated";
+export { defineCustomElements } from "biel-search/loader";

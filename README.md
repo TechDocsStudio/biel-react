@@ -29,3 +29,11 @@ Need assistance? [Contact us](https://docs.biel.ai/support) for help.
 Copyright (c) 2024 Biel.ai  
 
 Licensed under the [MIT License](LICENSE).
+
+## Package contracts and development
+
+This wrapper pins the published `biel-search` 0.1.94 artifact. `npm run build` derives the four public proxies (BielBot, BielButton, BielSearchButton and BielSearch) from that installed widget collection, imports its canonical JSX types, and emits CommonJS, ESM and declarations. `require('biel-react')` and `import ... from 'biel-react'` select their respective builds through package exports. Both export `defineCustomElements`; call it in the browser to register the widget.
+
+React and React DOM are peer dependencies supporting 18 and 19. Published declarations preserve widget props, custom event payloads and DOM refs; arrays/objects are assigned as properties, removed listeners are detached, and SSR relies on React's HTML escaping. Rebuilding removes stale generated artifacts.
+
+After `npm ci` and `npm run build`, run `node __tests__/artifact-contract.test.cjs` to pack the actual artifact and install it into isolated React 18.3.1 / 19.3.0 consumers. The check exercises CJS/ESM exports, the real widget loader and mount, boolean/array/Unicode props, event replacement/removal, refs, SSR escaping and consumer TypeScript types. Provider requests are blocked. This diagnostic leaves the existing test script unchanged.
