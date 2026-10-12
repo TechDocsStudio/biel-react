@@ -40,16 +40,4 @@ After `npm ci` and `npm run build`, run `node __tests__/artifact-contract.test.c
 
 ## Select a widget version
 
-To fix the widget version in an npm application, add an override to the application's root `package.json` and run `npm install`:
-
-```json
-{
-  "overrides": {
-    "biel-react": {
-      "biel-search": "0.1.93"
-    }
-  }
-}
-```
-
-Use the published version your application needs. Commit the application's lockfile to keep that resolved artifact reproducible. To return to the default selection, remove the override and update the dependency with npm. The wrapper keeps using the widget's npm loader; there is no runtime CDN version prop.
+See the [React installation guide](https://docs.biel.ai/installation/react#select-a-widget-version) for npm overrides and lockfile guidance.
