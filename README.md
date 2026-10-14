@@ -1,24 +1,24 @@
-# AI chatbot for React
+# AI assistant components for React
 
-Ask AI chatbot for React projects, powered by [Biel.ai](https://biel.ai).
+Add the [Biel.ai](https://biel.ai) AI assistant and documentation search to your React documentation. Help readers get answers grounded in your documentation, with links to the sources.
 
-![AI chatbot Docusaurus](https://biel.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcarousel-02.d9a9a331.png&w=1200&q=75)
+![Biel.ai AI assistant for React](https://biel.ai/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcarousel-02.d9a9a331.png&w=1200&q=75)
 
-Add AI to your React project using Biel.ai's official plugin.
-The integration works with any React site and adds both chat and advanced search capabilities to your project.
+These React components wrap Biel.ai's web components for conversational answers and documentation search.
 
-*Note: A Biel.ai plan is required to use this plugin. Try it free for 14 days—no credit card required.*
+*Note: A Biel.ai plan is required to use these components. Try it free for 14 days—no credit card required.*
 
 ## Key features
 
-- AI chatbot that provides instant responses to queries. 
-- AI search engine for quick and relevant information retrieval.
+- **Ask AI** button component (`BielButton`) to open the documentation assistant for answers with source links.
+- **Documentation search** components (`BielSearch` and `BielSearchButton`) for matching pages from indexed docs, with an **Ask AI** action that sends the current query to the assistant.
 - Integration with React 18+.
 - Customizable to match your site's branding and user needs.
+- **Connect** menu to connect indexed docs to Claude Code, Codex, and other MCP clients by copying an endpoint or setup command, or opening a supported client.
 
 ## Get started
 
-See the [React AI chatbot integration guide](https://docs.biel.ai/installation/react) for installation and setup instructions.
+See the [React AI assistant integration guide](https://docs.biel.ai/installation/react) for installation and setup instructions.
 
 ## Support
 
