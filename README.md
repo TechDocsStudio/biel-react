@@ -19,6 +19,12 @@ These React components wrap Biel.ai's web components for conversational answers 
 
 See the [React AI assistant integration guide](https://docs.biel.ai/installation/react) for installation and setup instructions.
 
+## MCP server for docs
+
+Connect the same indexed documentation to Claude Code, Codex, and other MCP-compatible clients with Biel.ai's [hosted MCP server](https://biel.ai/mcp-server-for-docs). These React components embed the website assistant. Configure the hosted MCP endpoint separately in your AI client.
+
+Hosted MCP requires a [plan that includes it](https://biel.ai/pricing). See the [MCP connection guide](https://docs.biel.ai/integrations/mcp-server) for client setup.
+
 ## Support
 
 Need assistance? [Contact us](https://docs.biel.ai/support) for help.
