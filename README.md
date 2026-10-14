@@ -10,7 +10,7 @@ These React components wrap Biel.ai's web components for conversational answers 
 
 ## Key features
 
-- AI assistant that answers questions from your connected documentation, with source links.
+- **Ask AI** button component (`BielButton`) to open the documentation assistant for answers with source links.
 - Documentation search with an Ask AI handoff to the assistant.
 - Integration with React 18+.
 - Customizable to match your site's branding and user needs.
