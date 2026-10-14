@@ -1,7 +1,7 @@
 {
   "name": "biel-react",
   "version": "0.1.17",
-  "description": "Biel wrapper for React",
+  "description": "React components for the Biel.ai AI assistant and documentation search",
   "author": "TechDocs Studio <info@techdocs.studio>",
   "homepage": "https://github.com/TechDocsStudio/biel-react#readme",
   "license": "ISC",
